@@ -1,0 +1,19 @@
+{
+  "name": "react-part5-lets-gets-hooked",
+  "version": "1.0.0",
+  "description": "This is about the structuring the layout and gets hooked",
+  "scripts": {
+    "start": "parcel index.html",
+    "build": "parcel build index.html",
+    "test": "Jest"
+  },
+  "author": "Raja Raavi",
+  "license": "ISC",
+  "dependencies": {
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0"
+  },
+  "devDependencies": {
+    "parcel": "^2.14.3"
+  }
+}
