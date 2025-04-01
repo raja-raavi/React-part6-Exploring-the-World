@@ -13,14 +13,15 @@ H/W - can I use default export along with named export?
 
 Yes - we can use the combination of both
 
-State is a super powerFul variable in React.. How do you make it super powerful.. to do that we use hooks i.e useState
-Definition : Whenever the state variables updates, React renders the component
-Functional component at the end of the day is normal JS fn
-Recat.createElement at the end of the day is a normal JS object
-||y Hook are normal JS functions the onlly difference is, it comes it super powers
+# useState :
 
-- useState() - superPowerful state variables in react
-- useEffect()
+When ever a sate variable changes recat will re-render the component - How do you prove this statement? -> Just log it in console
+If any viarbles changes from one value to another value then React don't capable of track changes whether ti got changed or not...Instead it come up with new one called useState() hooks
+Why we need use state? is it not possible with local variables i.e JS variables? Just try below example then u will got all answers
+**\***Just try the login and logout example, just try with normal JS way first and then try with useState - now u can see the difference
+It will changing from login to logout fine.. but how will it chanigng the CONST variable? It will become a new variable i.e instance and the <varaible name> is different than the older <variable name>
+
+//simply the variable is one but the data is going to varaible is different types from different souces
 
 Virtual DOM - it's a representation of Actula DOM and it's like a normal JS object
 
