@@ -1,11 +1,21 @@
 import { LOGO_URL } from "../utils/constants";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { Link } from "react-router";
 
 export const Header = () => {
   const [buttonName, setButtonName] = useState("Login");
 
-  //TO know whether the component is renered or not
-  console.log("component rendered");
+  //TO know whether the component is renered or not & testing the useState and useEffect cases
+  //console.log("component rendered");
+
+  //If no dependency arry => useEffect is called on every render => whwn a useState variable changes => useEffect called.
+  //If the dependency array is empty = [] => useEffect will call on only initial render (just once)
+  //If dependency array is [btnNameReact] => called every time btnNameReact is updated
+
+  useEffect(() => {
+    //console.log("useEffect called");
+  }, []);
+
   return (
     <div className="header">
       <div className="logo">
@@ -16,10 +26,16 @@ export const Header = () => {
       </div>
       <div className="nav-items">
         <ul>
-          <li>Home</li>
+          <li>
+            <Link to="/">Home</Link>
+          </li>
           <li>Cart</li>
-          <li>About us</li>
-          <li>Contact us</li>
+          <li>
+            <Link to="/about">About us</Link>
+          </li>
+          <li>
+            <Link to="contact">Contact us</Link>
+          </li>
           <button
             className="loginBtn"
             onClick={() => {

@@ -2,6 +2,7 @@ import RestaurantCard from "../components/RestaurantCard";
 import { useState, useEffect } from "react";
 import Shimmer from "./Shimmer";
 import { FETCHING_DATA } from "../utils/constants";
+import { Link } from "react-router";
 
 const Body = () => {
   const [listOfRestaurants, setListOfRestaurants] = useState([]);
@@ -10,30 +11,24 @@ const Body = () => {
 
   const [searchText, setSearchText] = useState("");
 
-  const [error, setError] = useState(null);
-
   useEffect(() => {
     fetchData();
-    console.log("use effect hook called");
   }, []);
 
-  console.log("Body Rendered"); //called before (1st) useEffect call back fn executed
+  //console.log("Body Rendered"); //called before (1st) useEffect call back fn executed
 
   const fetchData = async () => {
     try {
       const data = await fetch(FETCHING_DATA);
       const jsonResult = await data.json();
-      console.log(jsonResult);
-      setListOfRestaurants(
-        jsonResult?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle
-          ?.restaurants
-      );
-      setFilteredRestaurants(
-        jsonResult?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle
-          ?.restaurants
-      );
+      //console.log(jsonResult);
+      const restaurants =
+        jsonResult?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle
+          ?.restaurants || [];
+      setListOfRestaurants(restaurants);
+      setFilteredRestaurants(restaurants);
     } catch (error) {
-      setError(new Error("Something went wrong in fetching URL"));
+      console.error("Error fetching data:", error);
     }
   };
 
@@ -41,13 +36,11 @@ const Body = () => {
   //how can we impove user experince.. using shimmer ui
 
   //conditional rendering
-  // if (listOfRestaurants.length === 0) {
-  //   return <Shimmer />;
-  // }
+  if (!listOfRestaurants || listOfRestaurants.length === 0) {
+    return <Shimmer />;
+  }
 
-  return listOfRestaurants.length === 0 ? (
-    <Shimmer />
-  ) : (
+  return (
     <div className="body">
       <div className="search">
         <button
@@ -81,8 +74,13 @@ const Body = () => {
         </button>
       </div>
       <div className="res-container">
-        {filteredRestaurants.map((restaurant) => (
-          <RestaurantCard key={restaurant?.info?.id} resData={restaurant} />
+        {filteredRestaurants?.map((restaurant) => (
+          <Link
+            key={restaurant?.info?.id}
+            to={"/restaurants/" + restaurant?.info?.id}
+          >
+            <RestaurantCard resData={restaurant} />
+          </Link>
         ))}
       </div>
     </div>
